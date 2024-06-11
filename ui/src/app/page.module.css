@@ -1,18 +1,12 @@
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   padding: 1rem;
   min-height: 100vh;
-  gap: 1rem;
-}
-
-.inputContainer {
-  padding: 4px 6px;
-  display: flex;
-  align-items: center;
-  width: 30vw;
+  background: var(--background-end-rgb), url("/background.jpeg") no-repeat;
+  background-size: cover;
+  color: white !important;
 }
 
 /* Mobile */

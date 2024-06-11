@@ -6,6 +6,7 @@
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --foreground-rgb: 0, 0, 0;
+  --text-color: "#FFFFFF"
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 
@@ -86,13 +87,8 @@ body {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: var(--text-color);
+  background-color: #ffffff10;
 }
 
 body {
@@ -110,5 +106,6 @@ a {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+    background-color: #00000000;
   }
 }

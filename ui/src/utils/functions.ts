@@ -1,11 +1,8 @@
-const apiKey = "e70a965eaca8e47f9be5af3520099451";
-
-export async function getMovies(): Promise<Movie[]> {
-  const res = await fetch(
-    `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`
+export function searchMovies(movies: Movie[], searchTerm: string): Movie[] {
+  const lowerCaseSearchTerm = searchTerm.toLowerCase();
+  return movies.filter((movie) =>
+    movie.title.toLowerCase().includes(lowerCaseSearchTerm)
   );
-  const data = await res.json();
-  return data.results;
 }
 
 export function truncateDecimals(num: number, decimals: number): number {
@@ -13,4 +10,9 @@ export function truncateDecimals(num: number, decimals: number): number {
   const [integerPart, decimalPart] = strNum.split(".");
   const truncatedDecimalPart = (decimalPart || "").substring(0, decimals);
   return parseFloat(`${integerPart}.${truncatedDecimalPart}`);
+}
+
+export function getYearFromDate(dateString: string): string {
+  const dateParts = dateString.split("-");
+  return dateParts[0];
 }

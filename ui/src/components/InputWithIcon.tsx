@@ -1,11 +1,11 @@
-import { Divider, IconButton } from "@mui/material";
-import { StandardInput } from "./Input";
 import {
   CSSProperties,
   ChangeEventHandler,
   MouseEventHandler,
   ReactNode,
 } from "react";
+import { Divider, IconButton } from "@mui/material";
+import { StandardInput } from "./Input";
 
 type Props = {
   style?: CSSProperties | undefined;
@@ -41,9 +41,7 @@ export const InputWithIcon: React.FC<Props> = ({
       color={color}
       {...rest}
     >
-      {children && (
-        <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-      )}
+      {children && <Divider orientation="vertical" />}
       <IconButton onClick={onClick} disabled={disabled} type={type}>
         {children}
       </IconButton>

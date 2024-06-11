@@ -1,5 +1,10 @@
 type Genre_ids = [number, number];
 
+type Genre = {
+  id: number;
+  name: string;
+};
+
 type Movie = {
   adult: boolean;
   backdrop_path: string;
@@ -14,4 +19,5 @@ type Movie = {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  genres?: Genre[];
 };

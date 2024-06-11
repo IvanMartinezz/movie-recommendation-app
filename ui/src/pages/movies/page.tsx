@@ -1,26 +1,23 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { Box, Typography } from "@mui/material";
-import { getMovies } from "@/utils/functions";
+import { Box } from "@mui/material";
+import { RootState } from "@/store/store";
+import { Text } from "@/components/Text";
+import useMovies from "@/hooks/useFetchMovies";
 import MovieCard from "./components/MovieCard";
 
 export default function Movies() {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const router = useRouter();
+  const filteredMovies = useSelector(
+    (state: RootState) => state.search.filteredMovies
+  );
 
-  const fetchMovies = async () => {
-    const moviesData = await getMovies();
-    setMovies(moviesData);
-  };
+  const router = useRouter();
+  useMovies();
 
   const handleMovieClick = (movie: Movie) => {
     router.push(`/movies/${movie.id}`);
   };
-
-  useEffect(() => {
-    fetchMovies();
-  }, []);
 
   return (
     <Box
@@ -30,14 +27,21 @@ export default function Movies() {
       alignItems="center"
       gap="1.5rem"
       maxWidth="100%"
+      height={{ xs: "100%", md: "calc(260px * 2)" }}
+      overflow="auto"
+      padding="0.5rem"
     >
-      {movies.map((movie) => (
-        <MovieCard
-          movie={movie}
-          key={movie.id}
-          onClick={() => handleMovieClick(movie)}
-        />
-      ))}
+      {filteredMovies.length ? (
+        filteredMovies.map((movie) => (
+          <MovieCard
+            movie={movie}
+            key={movie.id}
+            onClick={() => handleMovieClick(movie)}
+          />
+        ))
+      ) : (
+        <Text textType="text">No movies found...</Text>
+      )}
     </Box>
   );
 }

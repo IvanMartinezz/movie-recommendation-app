@@ -1,12 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Provider } from "react-redux";
 import styles from "./page.module.css";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import store from "@/store/store";
 
-import Body from "@/components/Body";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Wrapper from "@/components/Wrapper";
+import Loading from "./loading";
 
 const theme = createTheme({
   breakpoints: {
@@ -21,16 +22,20 @@ const theme = createTheme({
 });
 
 export default function Home() {
-  const [name, setName] = useState<string>("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <main className={styles.main}>
-        <Header />
-        <Body />
-        <Footer />
-      </main>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <main className={styles.main}>
+          {loading ? <Loading /> : <Wrapper />}
+        </main>
+      </ThemeProvider>
+    </Provider>
   );
 }
